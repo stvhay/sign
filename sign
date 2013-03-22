@@ -1,0 +1,4 @@
+#!/bin/bash
+
+openssl pkeyutl -sign -in $1 -inkey $HOME/.sign/private_ecdsa.pem -out $1.sig
+

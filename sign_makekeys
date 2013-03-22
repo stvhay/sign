@@ -1,0 +1,6 @@
+#!/bin/bash
+
+mkdir -p $HOME/.sign
+openssl ecparam -out $HOME/.sign/private_ecdsa.pem -name secp521r1 -genkey
+openssl ec -in $HOME/.sign/private_ecdsa.pem -pubout -out $HOME/.sign/public_ecdsa.pem
+

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+openssl pkeyutl -verify -in $1 -sigfile $1.sig -pubin -inkey $HOME/.sign/public_ecdsa.pem
+
