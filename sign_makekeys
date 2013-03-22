@@ -1,6 +1,25 @@
 #!/bin/bash
+KEYDIR="$HOME/.sign"
+PRIVATE="$KEYDIR/private_ecdsa.pem"
+PUBLIC="$KEYDIR/public_ecdsa.pem"
 
-mkdir -p $HOME/.sign
-openssl ecparam -out $HOME/.sign/private_ecdsa.pem -name secp521r1 -genkey
-openssl ec -in $HOME/.sign/private_ecdsa.pem -pubout -out $HOME/.sign/public_ecdsa.pem
+mkdir -p $KEYDIR
 
+if [ -f $PRIVATE ]
+  then
+    echo "Private key already exists in $KEYDIR."
+  else
+    echo "Generating private key..."
+    openssl ecparam -out $PRIVATE -name secp521r1 -genkey
+    rm -f $PUBLIC
+    echo "Private key saved in $PRIVATE."
+fi
+
+if [ -f $PUBLIC ]
+  then
+    echo "Public key already exists in $KEYDIR."
+  else
+    echo "Generating public key..."
+    openssl ec -in $PRIVATE -pubout -out $PUBLIC
+    echo "Public key saved in $PUBLIC."
+fi

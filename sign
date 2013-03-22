@@ -1,4 +1,10 @@
 #!/bin/bash
+KEYDIR="$HOME/.sign"
+PRIVATE="$KEYDIR/private_ecdsa.pem"
 
-openssl pkeyutl -sign -in $1 -inkey $HOME/.sign/private_ecdsa.pem -out $1.sig
-
+if [ -f $PRIVATE ]
+  then
+    openssl pkeyutl -sign -in $1 -inkey $PRIVATE -out $1.sig
+  else
+    echo "ERROR: Private key not found.  Run 'sign_makekeys'."
+fi

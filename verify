@@ -1,4 +1,10 @@
 #!/bin/bash
+KEYDIR="$HOME/.sign"
+PUBLIC="$KEYDIR/public_ecdsa.pem"
 
-openssl pkeyutl -verify -in $1 -sigfile $1.sig -pubin -inkey $HOME/.sign/public_ecdsa.pem
-
+if [ -f $PUBLIC ]
+  then
+    openssl pkeyutl -verify -in $1 -sigfile $1.sig -pubin -inkey $PUBLIC
+  else
+    echo "ERROR: Public key not found.  Run 'sign_makekeys'."
+fi
