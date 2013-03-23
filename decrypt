@@ -1,0 +1,2 @@
+#!/bin/bash
+openssl enc -d -aes256 -in $1.crypt -out $1
