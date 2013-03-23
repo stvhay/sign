@@ -4,7 +4,8 @@ PUBLIC="$KEYDIR/public_ecdsa.pem"
 
 if [ -f $PUBLIC ]
   then
-    openssl pkeyutl -verify -in $1 -sigfile $1.sig -pubin -inkey $PUBLIC
+    #openssl pkeyutl -verify -in $1 -sigfile $1.sig -pubin -inkey $PUBLIC
+    openssl dgst -sha512 -verify $PUBLIC -signature $1.sig $1
   else
     echo "ERROR: Public key not found.  Run 'sign_makekeys'."
 fi
