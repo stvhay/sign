@@ -1,2 +1,2 @@
 #!/bin/bash
-openssl dgst -sha512 $1 
+openssl dgst -sha512 $1 | sed -e 's/\(.*\)\= //;' > $1.dgst
