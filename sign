@@ -4,7 +4,6 @@ PRIVATE="$KEYDIR/private_ecdsa.pem"
 
 if [ -f $PRIVATE ]
   then
-    #openssl pkeyutl -sign -in $1 -inkey $PRIVATE -out $1.sig
     openssl dgst -sha512 -sign $PRIVATE -out $1.sig $1 
   else
     echo "ERROR: Private key not found.  Run 'sign_makekeys'."
